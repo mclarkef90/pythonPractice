@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to SharePage</h1>
+
+<div id="tweets">
+
+</div>
+
+<script>
+
+    function formatTweetElement(tweet){
+        let formattedTweet = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content  + "</p></div>"
+        return formattedTweet       
+    }
+    const tweetsElement = document.getElementById("tweets")
+    tweetsElement.innerHTML= "loading..."
+    const xhr = new XMLHttpRequest()
+    const method = "GET"
+    const url = "/tweets"
+    const responseType = "json"
+
+    xhr.responseType= responseType
+    xhr.open(method, url)
+    xhr.onload= function(){
+        const serverResponse = xhr.response
+        const listedItems = serverResponse.response
+        let finalTweetStr = ""
+        let i;
+        for (i=0; i<listedItems.length; i++){
+            var tweetObj = listedItems[i]
+            var currentItem= formatTweetElement(tweetObj)
+            finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
+    }
+    xhr.send()
+</script>
+
+{% endblock content %}
