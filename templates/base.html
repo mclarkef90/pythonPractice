@@ -11,8 +11,17 @@
     <title>Share Page</title>
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class= 'container'>
+      {% include "components/navbar.html" %}
+
+      <div class='row text-center' >
+        <div class='col'>
+          <h1>Welcome to Share Page</h1>
+        </div>
+      </div>
+      {% block content %}
+      {% endblock content %}
+  </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
